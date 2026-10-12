@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1420">
+  <title>Undangan Ibadah suku | Jemaat GMIT USI APAKAET KUANKOBO</title>
+  <style>
+    :root {
+      --navy:#0b1420; --navy2:#101e2d; --gold:#e8bd68; --cream:#fff6e5;
+      --muted:#c5ced8; --line:rgba(232,189,104,.25);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--cream); background:var(--navy); font-family:Georgia,"Times New Roman",serif; line-height:1.6; }
+    body.locked { overflow:hidden; }
+    a { color:inherit; }
+    .nav { position:absolute; z-index:5; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center; gap:20px; padding:22px clamp(18px,5vw,70px); }
+    .brand { color:var(--gold); font-size:.9rem; letter-spacing:.12em; font-weight:bold; }
+    .navlinks { display:flex; gap:22px; flex-wrap:wrap; font:500 .85rem Arial,sans-serif; }
+    .navlinks a { text-decoration:none; color:#f8f3e9; opacity:.9; }
+    .navlinks a:hover { color:var(--gold); }
+    .hero { min-height:680px; display:flex; align-items:center; padding:125px clamp(20px,9vw,130px) 85px; position:relative; overflow:hidden; background:linear-gradient(90deg,rgba(6,13,22,.94) 0%,rgba(6,13,22,.72) 47%,rgba(6,13,22,.2) 100%),linear-gradient(0deg,var(--navy),transparent 35%),url('bc3.timorkupang.jpg') center/cover; }
+    .hero-content { max-width:690px; position:relative; z-index:1; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.28em; color:var(--gold); font:700 .78rem Arial,sans-serif; }
+    h1 { font-size:clamp(3rem,7vw,6rem); line-height:.98; font-weight:normal; font-style:italic; color:var(--gold); margin:15px 0 18px; }
+    .church { font-size:clamp(1.25rem,2.4vw,1.8rem); margin:0 0 18px; }
+    .verse { color:#f0e5d3; font-style:italic; max-width:540px; }
+    .details { display:flex; gap:25px; flex-wrap:wrap; margin:28px 0; font: .95rem Arial,sans-serif; }
+    .detail { border-left:2px solid var(--gold); padding-left:12px; }
+    .detail strong { display:block; color:var(--gold); margin-bottom:3px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; border:0; text-decoration:none; border-radius:999px; padding:13px 23px; font:700 .9rem Arial,sans-serif; cursor:pointer; transition:.2s; }
+    .btn-gold { background:var(--gold); color:#152031; }
+    .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 24px #0005; }
+    .btn-outline { border:1px solid var(--gold); color:var(--gold); background:transparent; }
+    section { padding:76px clamp(20px,8vw,110px); }
+    .section-head { margin-bottom:30px; }
+    .section-head .eyebrow { margin-bottom:8px; }
+    h2 { font-size:clamp(2rem,4vw,3rem); color:var(--gold); font-weight:normal; margin:0 0 10px; }
+    .intro { max-width:680px; color:var(--muted); margin:0; }
+    .about { display:grid; grid-template-columns:1.3fr .7fr; gap:45px; align-items:center; background:linear-gradient(135deg,var(--navy2),var(--navy)); }
+    .quote-card { border:1px solid var(--line); padding:30px; border-radius:18px; color:var(--gold); font-size:1.4rem; font-style:italic; }
+    .gallery { background:#0e1926; }
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .photo { border:1px solid var(--line); padding:0; background:#162638; border-radius:13px; overflow:hidden; cursor:pointer; min-height:170px; }
+    .photo img { width:100%; height:220px; object-fit:cover; display:block; transition:transform .35s; }
+    .photo:hover img { transform:scale(1.04); }
+    .photo span { display:block; text-align:left; padding:10px 13px; font: .85rem Arial,sans-serif; color:var(--muted); }
+    .location-wrap { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch; }
+    .panel { background:var(--navy2); border:1px solid var(--line); border-radius:18px; padding:25px; }
+    .panel h3 { margin:0 0 12px; color:var(--gold); font-size:1.5rem; font-weight:normal; }
+    .map-frame { width:100%; height:300px; border:0; border-radius:12px; background:#dce3e9; }
+    audio { width:100%; margin-top:15px; }
+    .rsvp { background:linear-gradient(135deg,#111f2e,#09121c); text-align:center; }
+    .rsvp-inner { max-width:700px; margin:auto; }
+    .rsvp p { color:var(--muted); }
+    .btn-wa { background:#20b965; color:white; margin-top:14px; }
+    footer { border-top:1px solid var(--line); padding:24px 20px; text-align:center; color:#9daab8; font: .8rem Arial,sans-serif; }
+    .note { color:#aebac8; font: .82rem Arial,sans-serif; margin-top:14px; }
+
+    /* Sampul pembuka: satu ketukan memutar musik */
+    #sampul { position:fixed; inset:0; z-index:100; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:24px; background:radial-gradient(circle at 50% 30%,#14263a,var(--navy) 70%); transition:opacity .7s ease, visibility .7s ease; }
+    #sampul.hilang { opacity:0; visibility:hidden; }
+    #sampul h1 { font-size:clamp(2.4rem,9vw,4.5rem); margin:14px 0 10px; }
+    #sampul .church { margin-bottom:28px; }
+
+    /* Tombol musik melayang */
+    #toggleMusik { position:fixed; right:16px; bottom:16px; z-index:50; width:48px; height:48px; border-radius:50%; border:1px solid var(--gold); background:var(--navy2); color:var(--gold); font-size:1.3rem; cursor:pointer; display:none; place-items:center; }
+    #toggleMusik.tampil { display:grid; }
+    #toggleMusik.putar { animation:putar 6s linear infinite; }
+    @keyframes putar { to { transform:rotate(360deg); } }
+    .btn:focus-visible, #toggleMusik:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+    @media (prefers-reduced-motion:reduce) { #toggleMusik.putar { animation:none; } html { scroll-behavior:auto; } }
+
+    @media(max-width:760px) {
+      .nav { align-items:flex-start; flex-direction:column; padding:17px 20px; }
+      .navlinks { gap:13px; font-size:.78rem; }
+      .about,.location-wrap { grid-template-columns:1fr; }
+      .gallery-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+      .photo img { height:160px; }
+      section { padding-top:55px; padding-bottom:55px; }
+      .details { gap:15px; }
+    }
+    @media(max-width:420px) { .gallery-grid { grid-template-columns:1fr; } .photo img { height:210px; } }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- Sampul: ketukan pertama pengunjung = izin browser untuk memutar musik -->
+  <div id="sampul" role="dialog" aria-label="Sampul undangan">
+    <div class="eyebrow">Degan suka cita,kami mengundang:</div>
+    <h1>Presbiter Jemaat<br>Usi Apakaet Kuankobo</h1>
+    <p class="church">Untuk Hadir Pada ibadah suku<br>"TIMOR KUPANG"</p>
+    <button id="bukaSampul" class="btn btn-gold" type="button">✉ Buka Undangan</button>
+  </div>
+
+  <button id="toggleMusik" type="button" aria-label="Jeda atau putar musik">♪</button>
+
+  <nav class="nav">
+    <div class="brand"> UNDANGAN IBADAH SUKU "TIMOR KUPANG"</div>
+    <div class="navlinks">
+      <a href="#beranda">Beranda</a><a href="#tentang">Tentang</a><a href="#galeri">Galeri</a>
+      <a href="#lokasi">Lokasi</a><a href="#konfirmasi">Konfirmasi</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="beranda">
+    <div class="hero-content">
+      <div class="eyebrow">Thema Bulan keluarga GMIT 2026</div>
+      <h1>"Allah yang setia menyembuhkan luka<br>keluarga dan Gereja"</h1>
+      <div class="details"></div>
+
+      <a class="btn btn-gold" href="#tentang">Lihat Detail Acara ↓</a>
+    </div>
+  </header>
+
+  <section class="about" id="tentang">
+    <div>
+      <div class="section-head"><div class="eyebrow">Thema</div><h2>"Allah Yang Setia Menyembuhkan Luka Keluarga dan Gereja"</h2></div>
+      <p class="intro">Dengan penuh rasa syukur dan sukacita atas berkat serta penyertaan Tuhan kepada keluarga Suku Timor Kupang didalam rangkaian perayaan Bulan Keluarga tahun ini, kami mengundang Bapak/Ibu/Saudara/i untuk berkenan hadir dan bersekutu bersama dalam Ibadah Suku yang sedianya akan dilaksanakan pada:</p>
+      <p class="intro" style="margin-top:15px"></p>
+      <div class="detail"><strong>HARI / TANGGAL</strong><span>Selasa,13 Oktober 2026</span></div>
+      <div class="detail"><strong>WAKTU</strong><span>18:30 WITA</span></div>
+      <div class="detail"><strong>LOKASI</strong><span>RUMAH BAPAK ALEKSANDER HENDRI MOKA (SAUDARI THERESIA IBU)</span></div>
+    </div>
+    <div class="quote-card">“Uis Neno Nokan Kit”<div style="font-size:.9rem;margin-top:15px;color:var(--muted);font-style:normal"></div></div>
+  </section>
+
+  <section class="gallery" id="galeri">
+    <div class="section-head"><div class="eyebrow">Dokumentasi Suku Timor Kupang</div><h2>Galeri Foto</h2><p class="intro"></p></div>
+      <!-- Ganti dengan nama file di folder yang sama, mis. gambar-gereja.png (alamat d:\ tidak bisa dibuka pengunjung) -->
+        <div class="photo"><img src="bc35.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc34.jpg" alt=""><span></span></div>
+      <div class="photo"><img src="bc3.timorkupang.jpg" alt=""><span></span></div>
+      <div class="photo"><img src="bc4.jpg" alt=""><span></span></div>
+      <div class="photo"><img src="bc5.jpg" alt=""><span></span></div>
+      <div class="photo"><img src="bc6.jpg" alt=""><span></span></div>
+      <div class="photo"><img src="bc7.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc8.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc9.jpg" alt=""><span></span></div>  
+         <div class="photo"><img src="bc10.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc11.jpg" alt=""><span></span></div> 
+         <div class="photo"><img src="bc12.jpg" alt=""><span></span></div>   
+         <div class="photo"><img src="bc13.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc14.jpg" alt="><span></span></div>
+         <div class="photo"><img src="bc15.jpg" alt=><span></span></div>
+         <div class="photo"><img src="bc16.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc17.jpg" alt=""><span></span></div>
+         <div class="photo"><img src="bc18.jpg" alt=""><span></span></div>
+          <div class="photo"><img src="bc19.jpg" alt=""><span></span></div>  
+           <div class="photo"><img src="bc20.jpg" alt=""><span></span></div>  
+            <div class="photo"><img src="bc21.jpg" alt=""><span></span></div>  
+             <div class="photo"><img src="bc22.jpg" alt=""><span></span></div>  
+              <div class="photo"><img src="bc23.jpg" alt=""><span></span></div>  
+               <div class="photo"><img src="bc24.jpg" alt=""><span></span></div>  
+                <div class="photo"><img src="bc25.jpg" alt=""><span></span></div>  
+                 <div class="photo"><img src="bc26.jpg" alt=""><span></span></div>  
+                  <div class="photo"><img src="bc27.jpg" alt=""><span></span></div>  
+                   <div class="photo"><img src="bc28.jpg" alt=""><span></span></div>  
+                    <div class="photo"><img src="bc29.jpg" alt=""><span></span></div>  
+                     <div class="photo"><img src="bc30.jpg" alt=""><span></span></div>  
+                      <div class="photo"><img src="bc31.jpg" alt=""><span></span></div>  
+                       <div class="photo"><img src="bc32.jpg" alt=""><span></span></div>  
+                        <div class="photo"><img src="bc33.jpg" alt=""><span></span></div>
+                       
+
+    </div>
+  </section>
+
+  <section id="lokasi">
+    <div class="section-head"><div class="eyebrow">Temukan tempat ibadah</div><h2>Lokasi Ibadah</h2><p class="intro">Peta di bawah ini adalah lokasi ibadah yang akan dilaksanakan.</p></div>
+    <div class="location-wrap">
+      <div class="panel">
+        <h3>Petunjuk lokasi</h3>
+        <iframe class="map-frame" loading="lazy" title="Peta lokasi ibadah" src="https://www.google.com/maps/place/10%C2%B012'14.0%22S+123%C2%B037'08.4%22E/@-10.2038924,123.6164312,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-10.2038924!4d123.6190061?hl=id&entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D"></iframe>
+        <p class="note">Jika peta belum tepat, ubah kata pencarian pada atribut <code>src</code> iframe di file index.html.</p>
+      </div>
+      <div class="panel">
+        <h3>Alamat acara</h3>
+        <p>Rumah Bapak Aleksander Moka <br>Kota Kupang, Nusa Tenggara Timur</p>
+        <a class="btn btn-gold" target="_blank" rel="noopener" href="https://www.google.com/maps/place/10%C2%B012'14.0%22S+123%C2%B037'08.4%22E/@-10.2038924,123.6164312,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-10.2038924!4d123.6190061?hl=id&entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D">⌖ Buka di Google Maps</a>
+        <hr style="border:0;border-top:1px solid var(--line);margin:25px 0">
+        <h3>Musik latar</h3>
+        <p class="intro"></p>
+
+        <audio id="musikUndangan" loop preload="auto" controls>
+          <source src="Uis_Tutani_Maun_-_Merari_VG(48k).mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp" id="konfirmasi">
+    <div class="rsvp-inner">
+      <div class="eyebrow">Kami menantikan kehadiran Anda</div>
+      <h2>Konfirmasi Kehadiran</h2>
+      <p>Tekan tombol di bawah untuk mengirim konfirmasi melalui WhatsApp kepada panitia atau kontak kehadiran anda</p>
+      <a class="btn btn-wa" id="waLink" href="#" target="_blank" rel="noopener">☏ Konfirmasi via WhatsApp</a>
+      <p class="note"></p>
+    </div>
+  </section>
+
+  <footer>Undangan Ibadah · Jemaat USI Apakaet Kuankobo, GMIT<br>Kiranya kasih dan damai Kristus menyertai kita semua.</footer>
+
+  <script>
+    // GANTI nomor berikut dengan nomor WhatsApp panitia.
+    // Gunakan kode negara 62 tanpa tanda +, spasi, atau angka 0 di depan.
+    const nomorPanitia = "081338634294";
+    const pesan = "Shalom, saya ingin mengonfirmasi kehadiran dalam ibadah. Nama: ";
+    document.getElementById("waLink").href =
+      "https://wa.me/" + nomorPanitia + "?text=" + encodeURIComponent(pesan);
+
+    const musik = document.getElementById("musikUndangan");
+    const sampul = document.getElementById("sampul");
+    const tombolMusik = document.getElementById("toggleMusik");
+
+    function tampilkanUndangan() {
+      sampul.classList.add("hilang");
+      document.body.classList.remove("locked");
+      tombolMusik.classList.add("tampil");
+      setTimeout(() => { sampul.style.display = "none"; }, 800);
+    }
+
+    function perbaruiTombol() {
+      const main = !musik.paused;
+      tombolMusik.classList.toggle("putar", main);
+      tombolMusik.textContent = main ? "♪" : "▶";
+    }
+
+    async function putarMusik() {
+      try { await musik.play(); return true; }
+      catch (e) { return false; }
+    }
+
+    musik.addEventListener("play", perbaruiTombol);
+    musik.addEventListener("pause", perbaruiTombol);
+
+    // 1) Coba putar langsung saat halaman dibuka (berhasil di sebagian browser/pengaturan).
+    //    Jika berhasil, sampul langsung hilang.
+    window.addEventListener("load", async () => {
+      if (await putarMusik()) tampilkanUndangan();
+    });
+
+    // 2) Jika diblokir browser (kasus umum), ketukan "Buka Undangan" memutar musik.
+    document.getElementById("bukaSampul").addEventListener("click", () => {
+      putarMusik();
+      tampilkanUndangan();
+    });
+
+    // 3) Tombol melayang untuk jeda / putar kembali.
+    tombolMusik.addEventListener("click", () => {
+      if (musik.paused) putarMusik(); else musik.pause();
+    });
+  </script>
+
+</body>
+</html>
